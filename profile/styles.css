@@ -42,34 +42,44 @@ body {
     align-items: center;
 }
 
-.avatar {
+.profile__avatar {
     width: 70px;
     height: 70px;
     border-radius: 16px;
     object-fit: cover;
 }
 
-.text {
+.profile__text {
     text-align: center;
     font-size: 14px;
     margin: 0;
 }
 
-.name {
+.profile__name {
     font-size: 32px;
+    line-height: 32px;
     font-weight: 500;
+    letter-spacing: -0.25px;
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
-.description {
+.profile__description {
     width: 360px;
     font-size: 15px;
+    line-height: 18px;
+    letter-spacing: -0.15px;
     font-weight: 400;
     margin-bottom: 12px;
 }
 
-.counter {
+.profile__icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+}
+
+.profile__counter {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -86,7 +96,7 @@ body {
     width: 320px;
 }
 
-.image-text {
+.post__content {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -100,7 +110,7 @@ body {
     pointer-events: none; 
 }
 
-.post-container:hover .image-text {
+.post-container:hover .post__content {
     opacity: 1; 
 }
 
@@ -111,17 +121,11 @@ body {
 }
 
 .userposts {
-    display: grid;
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(320px, 1fr)
-    );
-    gap: 2; 
     max-width: 1024px; 
     margin: 42px auto 0; 
 }
 
-.userposts img {
+.post__image {
     width: 320px;
     height: 320px;
     object-fit: cover; 

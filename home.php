@@ -6,18 +6,16 @@ $userId = isset($_GET['user_id']) ? (int)$_GET['user_id'] : 0;
 try {
     $sql = "
         SELECT 
-            p.*,
-            u.username AS user_name,
-            u.avatar_path AS user_avatar
+            post.*,
+            user.username AS user_name,
+            user.avatar_path AS user_avatar
         FROM 
-            post p
-        JOIN 
-            user u ON p.user_id = u.id
+            post
+        JOIN user ON post.user_id = user.id
     ";
-    
-    // Добавляем условие, если фильтруем по пользователю
+
     if ($userId > 0) {
-        $sql .= "WHERE p.user_id = ?";
+        $sql .= "WHERE post.user_id = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$userId]);
     } else {
@@ -32,7 +30,7 @@ try {
     unset($post);
 
 } catch(PDOException $e) {
-    die("Ошибка базы данных: " . $e->getMessage());
+    die("DBASE error: " . $e->getMessage());
 }
 ?>
 
@@ -52,46 +50,22 @@ try {
     </head>
     <body>
         <div class="navigation">
-            <div class="nav-item">
-                <img src="images/menu_home.png" alt="Home" onclick="redirectToPage('/home')"/>
+            <div class="navigation__item">
+                <img class="navigation__image" src="asset/menu_home.png" alt="Home" onclick="redirectToPage('/home')"/>
             </div>
-            <div class="nav-item">
-                <img src="images/menu_user.png" alt="Profile" onclick="redirectToPage('/profile?id=1')"/>
+            <div class="navigation__item">
+                <img class="navigation__image" src="asset/menu_user.png" alt="Profile" onclick="redirectToPage('/profile?id=1')"/>
             </div>
-            <div class="nav-item">
-                <img src="images/menu_plus.png" alt="Plus"  onclick="redirectToPage('/home')"/>
+            <div class="navigation__item">
+                <img class="navigation__image" src="asset/menu_plus.png" alt="Plus"  onclick="redirectToPage('/home')"/>
             </div>
         </div>
         <div class="wrapper">
             <div class="posts">
                 <?php foreach ($posts as $post): ?>
-                    <div class="post">
-                        <div class="userdata">
-                            <div class="row">
-                                <img src="<?= htmlspecialchars($post['user_avatar']) ?>" alt="User" class="avatar" />
-                                <p class="text"><?= htmlspecialchars($post['user_name']) ?></p>
-                            </div>
-                            <img src="images/edit_vector.png" alt="Edit" class="edit" />
-                        </div>
-                        <div class="contentwrapper">
-                            <img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Content" class="content" />
-                            <p class="count">1/3</p>
-                        </div>
-                        <div class="likes">
-                            <img src="images/like.png" alt="Like" />
-                            <p><?= $post['likes'] ?? 0 ?></p>
-                        </div>
-                        <p class="content">
-                            <strong><?= htmlspecialchars($post['title']) ?></strong><br>
-                            <em><?= htmlspecialchars($post['subtitle']) ?></em><br>
-                            <?= htmlspecialchars($post['content']) ?>
-                            <span class="more">...еще</span>
-                        </p>
-                        <p class="time"><?= date('H:i', strtotime($post['posted_at'])) ?></p>
-                    </div>
+                    <?php include 'home/post_template.php'; ?>
                 <?php endforeach; ?>
             </div>
         </div>
-    
     </body>
 </html>

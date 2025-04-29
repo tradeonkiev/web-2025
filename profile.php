@@ -54,7 +54,7 @@ try {
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 } catch(PDOException $e) {
-    die("Ошибка базы данных: " . $e->getMessage());
+    die("DBASE error: " . $e->getMessage());
 }
 ?>
 
@@ -75,13 +75,13 @@ try {
     <body>
         <div class="navigation">
             <div class="nav-item">
-                <img src="../lab4/images/menu_home.png" alt="Home" />
+                <img src="asset/menu_home.png" alt="Home" />
             </div>
             <div class="nav-item">
-                <img src="../lab4/images/menu_user.png" alt="Profile" />
+                <img src="asset/menu_user.png" alt="Profile" />
             </div>
             <div class="nav-item">
-                <img src="../lab4/images/menu_plus.png" alt="Plus" />
+                <img src="asset/menu_plus.png" alt="Plus" />
             </div>
         </div>
         <div class="wrapper">

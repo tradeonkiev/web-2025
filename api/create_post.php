@@ -1,29 +1,26 @@
 <?php
 header('Content-Type: application/json');
 
-require_once 'db_connection.php';
+require_once __DIR__ . '/../db_connection.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 if ($method !== 'POST') {
     http_response_code(405);
-    echo json_encode(['error' => 'Method Not Allowed']);
-    exit;
+    die(json_encode(['error' => 'Method not allowed']));
 }
 
 $input = json_decode(file_get_contents('php://input'), true);
 
 if (json_last_error()) {
     http_response_code(400);
-    echo json_encode(['error' => 'Invalid JSON data']);
-    exit;
+    die(json_encode(['error' => 'Invalid JSON data']));
 }
 
 $requiredFields = ['user_id', 'title', 'content', 'image'];
 foreach ($requiredFields as $field) {
     if (!array_key_exists($field, $input)) {
         http_response_code(400);
-        echo json_encode(['error' => "Field $field is required"]);
-        exit;
+        die(json_encode(['error' => "Field $field is required"]));
     }
 }
 
