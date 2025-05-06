@@ -25,6 +25,9 @@
 
 .wrapper {
     width: 100%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
 }
 
 body {
@@ -43,8 +46,8 @@ body {
 }
 
 .profile__avatar {
-    width: 70px;
-    height: 70px;
+    width: 120px;
+    height: 120px;
     border-radius: 16px;
     object-fit: cover;
 }
@@ -94,6 +97,7 @@ body {
     position: relative;
     display: inline-block; 
     width: 320px;
+    height: 320px;
 }
 
 .post__content {
@@ -121,6 +125,10 @@ body {
 }
 
 .userposts {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    gap: 2.5px;
     max-width: 1024px; 
     margin: 42px auto 0; 
 }

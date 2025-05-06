@@ -13,7 +13,7 @@ function isPrimeNumber(input) {
       return;
     }
   
-    let Primes = [];
+    let primes = [];
     let notPrimes = [];
   
     for (let num of input) {
@@ -23,15 +23,15 @@ function isPrimeNumber(input) {
       }
   
       if (isPrime(num)) {
-        Primes.push(num);
+        primes.push(num);
       } else {
         notPrimes.push(num);
       }
     }
   
     let result = '';
-    if (Primes.length > 0) {
-      result += Primes.join(', ') + ' простые числа';
+    if (primes.length > 0) {
+      result += primes.join(', ') + ' простые числа';
     }
     if (notPrimes.length > 0) {
       if (result) result += ', ';

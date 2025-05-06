@@ -27,7 +27,6 @@ body {
     display: flex;
     flex-direction: row;
     height: 100vh;
-    overflow: hidden;
 }
 
 .wrapper {
@@ -35,7 +34,6 @@ body {
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    overflow: scroll;
 }
 
 .posts {

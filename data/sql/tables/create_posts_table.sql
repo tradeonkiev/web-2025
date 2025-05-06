@@ -5,7 +5,6 @@ CREATE TABLE post (
     subtitle VARCHAR(200),
     likes INT,
     content MEDIUMTEXT,
-    image_path VARCHAR(255),
     posted_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );

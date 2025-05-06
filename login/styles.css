@@ -35,9 +35,13 @@ body {
 .login__form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
     width: 345px;
     margin: auto;
+}
+
+.login__hint {
+    margin: 0;
+    color: rgba(128, 128, 128, 1);
 }
 
 
@@ -55,7 +59,6 @@ body {
     border: 0;
     border-radius: 10px;
     background-color: #f2f3f5;
-    padding: 0 10px;
 }
 
 .login__form-hint {
@@ -68,7 +71,7 @@ body {
 .login__submit {
     width: 100%;
     height: 48px;
-    margin: 20px 0;
+    margin: 32px auto 0;
     background-color: #222222;
     text-align: center;
     padding: 5px;
