@@ -41,7 +41,6 @@ try {
             title,
             subtitle,
             content,
-            image_path AS image,
             posted_at
         FROM 
             post 
