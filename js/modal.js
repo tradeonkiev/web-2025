@@ -8,6 +8,7 @@ const allPosts = document.querySelectorAll('.post')
 let currentModalSlide = 0;
 let modalSlides = [];
 let totalModalSlides = 0;
+// позицирование добавить + оптимизация 
 for (let post of allPosts) {
     const postImages = post.querySelectorAll('.post__media-img')
     for (let postImage of postImages){
@@ -26,19 +27,18 @@ for (let post of allPosts) {
                 slide.style.display = index === 0 ? 'flex' : 'none';
                 modalSlidesContainer.appendChild(slide);
                 modalSlides.push(slide);
-                }
+            }
             updateCounter();
 
             document.addEventListener('keydown', handleKeydown);
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
-            });
+        });
     }
 };
 
 modalClose.addEventListener('click', function() {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    closeModal();
 });
 
 modalPrev.addEventListener('click', showPrevModalSlide);

@@ -1,7 +1,7 @@
 function countVowels(input) {
     if (typeof input == 'string'){
         const vowels = 'аеёиоуыэюя';
-        let found_vowels = [];
+        const found_vowels = [];
         let count = 0;
         for (let char of input) {
             if (vowels.includes(char)) {
@@ -18,4 +18,7 @@ function countVowels(input) {
 
 countVowels('фцусвкмаеипнтрггтксучквмеи');
 countVowels('121212');
+countVowels('');
+countVowels(new String(null));
+countVowels(`${NaN}`)
 countVowels(0)

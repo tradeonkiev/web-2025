@@ -36,90 +36,99 @@ body {
     width: 100%;
 }
 
-.posts {
-    margin-top: 74px;
+.image-push {
     display: flex;
+    margin-top: 82px;
     flex-direction: column;
     width: 474px;
-    gap: 36px;
 }
 
-.post {
-    display: flex;
-    flex-direction: column;
-}
-
-.post__user {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.post__user-info {
-    display: flex;
-    align-items: center;
-}
-
-.post__avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    margin-right: 10px;
-}
-
-.post__username {
-    font-size: 14px;
-    font-weight: 500;
-    font-family: 'Golos Text';
-}
-
-.post__edit {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-}
-
-.post__media {
-    position: relative;
-    max-width: 474px;
-    max-height: 474px;
-}
-
-.post__media-img {
+.image-push__uploader{
     width: 474px;
     height: 474px;
-    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(242, 243, 245, 1);
 }
 
-.post__media-count {
-    position: absolute;
-    right: 20px;
-    top: 16px;
-    width: 44px;
-    height: 24px;
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(34, 34, 34, 0.5);
-    font-size: 15px;
-    line-height: 18px;
+.image-push__uploader__icon{
+    display: flex;
+    font-size: 81px;
+}
+
+.slide-image {
+    /* width: 474px; */
+    /* height: 474px; */
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.image-push__uploader__btn {
+    display: flex;
+    border-radius: 10px;
+    height: 48px;
+    width: 143px;
+    /* padding: 0 16px; */
+    margin-top: -70px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(34, 34, 34, 1);
+    font-size: 16px;
     font-family: 'Golos Text';
+    color: rgba(255, 255, 255, 1);
+    border: none;
+}
+.image-push__btn-share{
+    width: 140px;
+    height: 48px;
+    background: rgba(180, 180, 180, 1);
+    color: rgba(255, 255, 255, 1);
+    font-family: 'Golos Text';
+    font-size: 16px;
     display: flex;
+    border-radius: 10px;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
+    border: none;
+    padding: 0 10px;
+    cursor: pointer;
 }
 
-.post__likes {
+.post__setup{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.image-push__btn-add-image{
+    font-family: 'Golos Text';
+    font-size: 15px;
+    display: inline-flex;
+    color: rgba(63, 138, 224, 1);
+    padding: 0;
+    background: transparent;
+    border: none;
     cursor: pointer;
-    margin: 16px 0;
-    padding: 6px 12px;
-    border-radius: 8px;
-    height: 30px;
-    width: 68px;
-    background-color: rgba(34, 34, 34, 0.05);
+    margin-top: 27px;
+}
+
+.image-push__btn-add-description{
+    font-family: 'Golos Text';
+    font-size: 15px;
+    color: rgba(128, 128, 128, 1);
+    display: flex;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-top: 23px;
+}
+
+.btn-add-image__icon{
+    width: 16px;
+    height: 16px;
 }
 
 .post__like-icon {
@@ -127,40 +136,6 @@ body {
 }
 
 .post__like-count{
-    font-family: 'Golos Text';
-}
-
-.post__text {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 15px;
-    margin: 0;
-    font-family: 'Golos Text';
-}
-
-.post__text--expanded {
-    display: block;
-    -webkit-line-clamp: unset;
-    overflow: visible;
-    text-overflow: unset;
-  }
-  
-
-.post__more {
-    background: transparent;
-    color: rgba(34, 34, 34, 0.5);
-    cursor: pointer;
-    border: none;
-    text-align: left;
-    padding: 0;
-}
-
-.post__time {
-    margin: 6px 0 0;
-    font-size: 14px;
     font-family: 'Golos Text';
 }
 

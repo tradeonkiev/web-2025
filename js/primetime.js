@@ -4,7 +4,7 @@ function isPrimeNumber(input) {
       return;
     }
   
-    if (typeof input === 'number') {
+    if (typeof input == 'number') {
       if (input % 1) {
         console.error(input + ' - число должно быть целым');
         return;
@@ -15,10 +15,9 @@ function isPrimeNumber(input) {
   
     let primes = [];
     let notPrimes = [];
-  
-    for (let num of input) {
+    input.forEach(num => {
       if (typeof num !== 'number' || !Number.isInteger(num)) {
-        console.error(num + ' - число должно быть целым');
+        console.error(num + ' - неверный формат ввода');
         return;
       }
   
@@ -27,7 +26,11 @@ function isPrimeNumber(input) {
       } else {
         notPrimes.push(num);
       }
-    }
+    })
+  
+    // for (let num of input) {
+      
+    // }
   
     let result = '';
     if (primes.length > 0) {

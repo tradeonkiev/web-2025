@@ -4,9 +4,6 @@ function generatePassword(length) {
         for (const elem of obj){
             answer.push([elem, Math.random()]);
         }
-        for (const elen of answer){
-            console.log(elen);
-        }
         answer.sort((x, y) => x[1] - y[1])
         return answer.map(x => x[0])
     }

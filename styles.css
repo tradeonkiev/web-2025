@@ -1,0 +1,32 @@
+.post {
+    width: 300px; /* Задайте нужную ширину */
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 1.5em;
+    position: relative;
+  }
+  
+  .post-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;       /* Ограничение до 2-х строк */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 3em; /* 2 строки * line-height (1.5em) */
+    transition: max-height 0.3s ease;
+  }
+  
+  .post-text.expanded {
+    -webkit-line-clamp: unset;
+    max-height: none;
+  }
+  
+  .toggle-btn {
+    margin-top: 8px;
+    background-color: transparent;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    padding: 0;
+  }
+  

@@ -27,10 +27,10 @@
         <p class="post__like-count"><?= $post['likes'] ?? 0 ?></p>
     </div>
 
-    <p class="post__text">
-        <?= htmlspecialchars($post['content']) ?>
-        <span class="post__more">...еще</span>
-    </p>
+    <div class="post__text-container">
+        <p class="post__text"><?= htmlspecialchars($post['content']) ?></p>
+        <button class="post__more" style="display: none;">ещё</button>
+    </div>
 
     <p class="post__time"><?= date('H:i', strtotime($post['posted_at'])) ?></p>
 </div>

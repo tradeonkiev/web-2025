@@ -50,6 +50,7 @@ try {
     <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&display=swap" rel="stylesheet" />
     <script defer src="js/slider.js"></script>
     <script defer src="js/modal.js"></script>
+    <script defer src="js/post-expand.js"></script>
 </head>
 <body>
     <div class="navigation">
@@ -87,3 +88,5 @@ try {
     </div>
 </body>
 </html>
+
+<!-- todo переделать картинку для загрузки -->
