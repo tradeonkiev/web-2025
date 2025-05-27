@@ -18,10 +18,10 @@
     align-items: center;
 }
 
-.navigation__image {
+/* .navigation__image {
     width: 24px;
     height: 24px;
-}
+} */
 
 body {
     display: flex;
@@ -113,6 +113,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-width: 1px;
+    border-color: rgba(34, 34, 34, 0.05);
     cursor: pointer;
     margin: 16px 0;
     padding: 6px 12px;
@@ -120,6 +122,12 @@ body {
     height: 30px;
     width: 68px;
     background-color: rgba(34, 34, 34, 0.05);
+}
+
+.post__likes--active{
+    background-color: rgba(239, 83, 83, 0.05);
+    border-color: rgba(255, 0, 0, 0.19);
+    color: rgba(116, 0, 0, 1);
 }
 
 .post__like-icon {
@@ -136,6 +144,7 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    word-break: break-all;
     font-size: 15px;
     margin: 0;
     font-family: 'Golos Text';

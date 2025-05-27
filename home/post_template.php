@@ -11,7 +11,7 @@
         <div class="post__media slider">
             <?php foreach ($post['images'] as $index => $image): ?>
                 <div class="slide" <?= $index === 0 ? 'style="display: block;"' : 'style="display: none;"' ?>>
-                    <img src="<?= htmlspecialchars($image) ?>" alt="Content" class="post__media-img clickable-image" />
+                    <img src="/images/<?= htmlspecialchars($image) ?>" alt="Content" class="post__media-img clickable-image" />
                 </div>
             <?php endforeach; ?>
             <div class="slider__controls">
@@ -21,11 +21,11 @@
             <div class="slider__counter">1/<?= count($post['images']) ?></div>
         </div>
     <?php endif; ?>
-
-    <div class="post__likes">
+    
+    <button class="post__likes <?= $post['user_liked'] ? 'post__likes--active' : '' ?>" data-post-id="<?= $post['id'] ?>">
         <img src="asset/like.png" alt="Like" class="post__like-icon" />
         <p class="post__like-count"><?= $post['likes'] ?? 0 ?></p>
-    </div>
+    </button>
 
     <div class="post__text-container">
         <p class="post__text"><?= htmlspecialchars($post['content']) ?></p>

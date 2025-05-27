@@ -38,12 +38,10 @@ $fileName = uniqid() . '.' . $extension;
 $targetPath = $uploadDir . $fileName;
 
 if (move_uploaded_file($imageFile['tmp_name'], $targetPath)) {
-    $imagePath = '/images/' . $fileName;
-    
     http_response_code(200);
     echo json_encode([
         'success' => true,
-        'image_path' => $imagePath
+        'image_name' => $fileName
     ]);
 } else {
     http_response_code(500);

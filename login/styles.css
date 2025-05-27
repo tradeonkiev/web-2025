@@ -9,7 +9,7 @@ body {
 .login {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    align-items: center; 
     background-color: white;
 }
 
@@ -83,3 +83,38 @@ body {
     border: none;
     border-radius: 10px;
 }
+
+.login__info {
+    width: 343px;
+    flex-direction: column;
+}
+
+.login__error {
+    overflow: hidden;
+    background-color: rgba(255, 236, 236, 1);
+    border-radius: 10px;
+    padding: 0 12px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    height: 0;
+    transition: height 0.3s ease, padding 0.3s ease;
+}
+
+.login__error--active {
+    height: 18px;
+    padding: 12px;
+}
+
+.login__error__msg{
+    margin-left: 6px;
+    font-family: "Golos Text";
+    font-size: 15px;
+    color: rgba(116, 0, 0, 1);
+}
+
+.login__error-icon {
+    width: 20px;
+    height: 20px;
+}
+

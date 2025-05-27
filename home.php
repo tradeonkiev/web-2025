@@ -1,22 +1,26 @@
 <?php
 require_once 'db_connection.php';
+require_once 'api/auth.php';
 
 $userId = isset($_GET['user_id']) ? (int)$_GET['user_id'] : 0;
 
 try {
     $sql = "
         SELECT 
-            post.*,
-            user.username AS user_name,
-            user.avatar_path AS user_avatar,
-            (SELECT COUNT(*) FROM post_images WHERE post_id = post.id) AS image_count
+            p.*,
+            u.username AS user_name,
+            u.avatar_path AS user_avatar,
+            (SELECT COUNT(*) FROM post_images WHERE post_id = p.id) AS image_count,
+            (SELECT COUNT(*) FROM post_likes WHERE post_id = p.id) AS likes
         FROM 
-            post
-        JOIN user ON post.user_id = user.id
+            post p
+        JOIN user u ON p.user_id = u.id
+        ORDER BY 
+            posted_at DESC
     ";
 
     if ($userId > 0) {
-        $sql .= " WHERE post.user_id = ?";
+        $sql .= " WHERE p.user_id = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$userId]);
     } else {
@@ -24,14 +28,25 @@ try {
     }
     
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     foreach ($posts as &$post) {
-        $stmt = $pdo->prepare("SELECT image_path FROM post_images WHERE post_id = ? ORDER BY position");
+        $stmt = $pdo->prepare("SELECT image_name FROM post_images WHERE post_id = ? ORDER BY position");
         $stmt->execute([$post['id']]);
         $post['images'] = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
         $post['timestamp'] = strtotime($post['posted_at']) * 1000;
     }
+    
     unset($post);
+
+    $user = authBySession($pdo);
+    $currentUserId = array_key_exists('id', $user)? $user['id'] : 1;
+
+    $likedStmt = $pdo->prepare("SELECT post_id FROM post_likes WHERE user_id = ?");
+    $likedStmt->execute([$currentUserId]);
+    $likedPosts = array_column($likedStmt->fetchAll(PDO::FETCH_ASSOC), 'post_id');
+
+    foreach ($posts as &$post) {
+        $post['user_liked'] = in_array($post['id'], $likedPosts);
+    }
 
 } catch(PDOException $e) {
     die("DBASE error: " . $e->getMessage());
@@ -51,6 +66,7 @@ try {
     <script defer src="js/slider.js"></script>
     <script defer src="js/modal.js"></script>
     <script defer src="js/post-expand.js"></script>
+    <script defer src="js/likes.js"></script>
 </head>
 <body>
     <div class="navigation">
@@ -67,12 +83,12 @@ try {
     
     <div class="wrapper">
         <div class="posts">
-            <?php foreach ($posts as $post): ?>
-                <?php include 'home/post_template.php'; ?>
+            <?php foreach ($posts as $post): 
+                include 'home/post_template.php';?>
             <?php endforeach; ?>
         </div>
     </div>
-
+    
     <div id="imageModal" class="modal">
         <div class="modal__content">
             <span class="modal__close">&times;</span>

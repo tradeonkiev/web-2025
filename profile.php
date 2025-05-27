@@ -1,12 +1,12 @@
 <?php
 require_once 'db_connection.php'; 
+require_once 'api/auth.php';
 
-if (!isset($_GET['id'])) {
-    header("Location: /home.php");
-    exit;
-} 
-
-$userId = filter_var($_GET['id'], FILTER_VALIDATE_INT);
+$userId = isset($_GET['id'])? filter_var($_GET['id'], FILTER_VALIDATE_INT) : 0;
+$session = authBySession($pdo);
+if (!$userId && array_key_exists('id', $session)){
+    $userId = $session['id'];
+}
 if (!$userId || $userId <= 0) {
     header("Location: /home.php");
     exit;
@@ -38,8 +38,6 @@ try {
     $stmt = $pdo->prepare("
         SELECT 
             id,
-            title,
-            subtitle,
             content,
             posted_at
         FROM 

@@ -11,6 +11,7 @@
             href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&display=swap"
             rel="stylesheet"
         />
+        <script defer src="js/login.js"></script>
     </head>
     <body>
         <div class="login">
@@ -18,17 +19,26 @@
                 <h1 class="login__title">Войти</h1>
                 <img src="/images/LoginImage.png" alt="login image" class="login__image" />
             </div>
-        
-            <form action="send" class="login__form">
-                <label class="login__label">Электропочта</label>
-                <input type="email" name="email" class="login__input" />
-                <p class="login__hint">Введите электропочту в формате *****@***.**</p>
+
+            <div class="login__info">
+                <div class="login__error" id="error">
+                    <img src="/asset/error-icon.png" class="login__error-icon"  id="errorIcon"/>
+                    <span id="errorMsg" class="login__error__msg">Email or password is incorrect.</span>
+                </div>
+
+                <form action="send" class="login__form" id="loginForm">
+                    <label class="login__label">Электропочта</label>
+                    <input type="email" name="email" class="login__input" />
+                    <p class="login__hint">Введите электропочту в формате *****@***.**</p>
+                
+                    <label class="login__label">Пароль</label>
+                    <input type="password" name="password" class="login__input" />
+                
+                    <input type="submit" value="Продолжить" class="login__submit" />
+                </form>
+            </div>
+
             
-                <label class="login__label">Пароль</label>
-                <input type="password" name="password" class="login__input" />
-            
-                <input type="submit" value="Продолжить" class="login__submit" />
-            </form>
         </div>        
     </body>
 </html>
