@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (response.ok) {
-                window.location.href = '/profile.html';
+                window.location.href = '/profile.php';
             } else {
                 const data = await response.json();
                 showError(errorBlock, data.error || 'Ошибка авторизации');
