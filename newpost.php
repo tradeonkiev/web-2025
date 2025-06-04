@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: /home.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -36,6 +43,7 @@
                         <button class="slider__button slider__button--prev">&lt;</button>
                         <button class="slider__button slider__button--next">&gt;</button>
                     </div>
+                    <button class="slider__delete-image-btn" id="deleteButton">×</button>
                     <div class="slider__counter" id="sliderCounter">1 из 1</div>
                 </div>
                 <button class="image-push__btn-add-image" id="uploadBtnSecondary"> 

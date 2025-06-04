@@ -292,3 +292,26 @@ body {
     justify-content: center;
     line-height: 36px;
 }
+
+.slider__delete-image-btn {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: rgba(34, 34, 34, 0.5);
+    color: rgba(255, 255, 255, 1);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.slider__delete-image-btn:hover {
+    background-color: rgba(34, 34, 34, 0.6);
+    transform: scale(1.1);
+}

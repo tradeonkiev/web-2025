@@ -2,9 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.post__likes').forEach(likeButton => {
         likeButton.addEventListener('click', async () => {
             const postId = likeButton.dataset.postId;
-            const likeIcon = likeButton.querySelector('.post__like-icon');
             const likeCountEl = likeButton.querySelector('.post__like-count');
-            const isLiked = likeButton.classList.contains('post__likes--active');
             try {
                 const response = await fetch('/api/like_post.php', {
                     method: 'POST',

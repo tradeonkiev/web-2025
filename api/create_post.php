@@ -3,6 +3,8 @@ header('Content-Type: application/json');
 require_once __DIR__ . '/../db_connection.php';
 require_once __DIR__ . '/auth.php';
 
+session_start();
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     die(json_encode(['error' => 'Method not allowed']));
@@ -15,7 +17,8 @@ if (json_last_error()) {
     die(json_encode(['error' => 'Invalid JSON data']));
 }
 
-$requiredFields = ['user_id', 'content'];
+
+$requiredFields = ['content', 'images'];
 foreach ($requiredFields as $field) {
     if (!isset($input[$field])) {
         http_response_code(400);
@@ -31,7 +34,7 @@ try {
     ");
     
     $stmt->execute([
-        ':user_id' => $input['user_id'],
+        ':user_id' => $_SESSION['user_id'],
         ':content' => $input['content']
     ]);
     

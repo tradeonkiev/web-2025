@@ -12,7 +12,7 @@ if (empty($email) || empty($password)) {
     exit;
 }
 
-$stmt = $pdo->prepare("SELECT * FROM user WHERE email = :email LIMIT 1");
+$stmt = $pdo->prepare("SELECT * FROM user WHERE email = :email");
 $stmt->execute(['email' => $email]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 

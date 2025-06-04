@@ -35,10 +35,10 @@ try {
         $post['timestamp'] = strtotime($post['posted_at']) * 1000;
     }
     
-    unset($post);
+    
 
     $user = authBySession($pdo);
-    $currentUserId = array_key_exists('id', $user)? $user['id'] : 1;
+    $currentUserId = array_key_exists('id', $user)? $user['id'] : 0;
 
     $likedStmt = $pdo->prepare("SELECT post_id FROM post_likes WHERE user_id = ?");
     $likedStmt->execute([$currentUserId]);
@@ -47,7 +47,7 @@ try {
     foreach ($posts as &$post) {
         $post['user_liked'] = in_array($post['id'], $likedPosts);
     }
-
+    unset($post);
 } catch(PDOException $e) {
     die("DBASE error: " . $e->getMessage());
 }
@@ -67,6 +67,8 @@ try {
     <script defer src="js/modal.js"></script>
     <script defer src="js/post-expand.js"></script>
     <script defer src="js/likes.js"></script>
+    <script defer src="js/edits.js"></script>
+    <script defer src="js/logout.js"></script>
 </head>
 <body>
     <div class="navigation">
@@ -102,6 +104,15 @@ try {
             <div class="modal__counter">1 из 3</div>
         </div>
     </div>
+    <?php if($currentUserId): ?>
+        <div class="current-user">
+            <!-- <img src="<?= htmlspecialchars($user['avatar_path']) ?>" alt="User" class="current-user__avatar" /> -->
+            <div class="current-user__icon" style="background-color: <?= getUserColor($user['email'] ?? '') ?>">
+            <p> <?= $user['email'][0] ?></p>
+            </div>
+            <img src="asset/iron_door.png" class="current-user__logout">
+        </div>
+    <?php endif; ?>
 </body>
 </html>
 

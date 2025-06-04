@@ -14,7 +14,7 @@ if (empty($_FILES['image'])) {
 
 $imageFile = $_FILES['image'];
 
-$allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+$allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'];
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
 $mimeType = finfo_file($finfo, $imageFile['tmp_name']);
 finfo_close($finfo);

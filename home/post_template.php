@@ -1,10 +1,10 @@
-<div class="post">
+<div class="post" >
     <div class="post__user">
         <div class="post__user-info">
             <img src="<?= htmlspecialchars($post['user_avatar']) ?>" alt="User" class="post__avatar" />
             <p class="post__username"><?= htmlspecialchars($post['user_name']) ?></p>
         </div>
-        <img src="asset/edit_vector.png" alt="Edit" class="post__edit" />
+        <img src="asset/edit_vector.png" alt="Edit" class="post__edit" data-post-id="<?= $post['id'] ?>"/>
     </div>
 
     <?php if (!empty($post['images'])): ?>

@@ -6,28 +6,59 @@ document.addEventListener('DOMContentLoaded', () => {
     const imageSlider = document.getElementById('imageSlider');
     const slidesContainer = document.getElementById('slidesContainer');
     const sliderCounter = document.getElementById('sliderCounter');
+    const deleteBtn = document.getElementById('deleteButton');
     const postCaption = document.getElementById('postCaption');
     const shareBtn = document.getElementById('shareBtn');
     const prevBtn = document.querySelector('.slider__button--prev');
     const nextBtn = document.querySelector('.slider__button--next');
-
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = urlParams.get('id');
+    
     let uploadedImages = []; 
     let previewImages = [];
     let currentSlideIndex = 0;
 
     initEvents();
+
     function initEvents() {
+        if (postId) {
+            initEditMode(postId);
+            document.title = 'Редактирование поста';
+            shareBtn.textContent = 'Потвердить';
+        }
+
         uploadBtnMain.addEventListener('click', () => fileInput.click());
         uploadBtnSecondary.addEventListener('click', () => fileInput.click());
         fileInput.addEventListener('change', handleFileSelect);
+        deleteBtn.addEventListener('click', deleteSlide);
         prevBtn.addEventListener('click', showPrevSlide);
         nextBtn.addEventListener('click', showNextSlide);
         postCaption.addEventListener('input', validateForm);
-        shareBtn.addEventListener('click', createPost);
+        shareBtn.addEventListener('click', submitPost);
     }
 
-
-
+    async function initEditMode(postId) {
+        try {
+            const response = await fetch(`/api/get_post.php?id=${postId}`);
+            const data = await response.json();
+    
+            if (!data.success) {
+                console.log('aaaaaa')
+                window.location.href = '/home.php';
+                return;
+            }
+    
+            postCaption.value = data.content;
+            previewImages = data.images.map(img => `/images/${img.image_name}`);
+            uploadedImages = data.images.map(img => img.image_name);
+    
+            updateImageDisplay();
+        } catch (err) {
+            console.error('Ошибка загрузки поста:', err);
+            alert('Ошибка сети');
+        }
+    }
+    
 
     async function uploadImage(file) {
         const formData = new FormData();
@@ -38,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 body: formData
             });
+            // console.log(response);
             
             if (!response.ok) {
                 throw new Error('Upload failed');
@@ -73,34 +105,39 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInput.value = '';
     }
 
-    async function createPost() {
+    async function submitPost() {
         if (uploadedImages.length === 0 || !postCaption.value.trim()) return;
-
-        try {
-            const response = await fetch('/api/create_post.php', {
+    
+        const payload = {
+            content: postCaption.value,
+            images: uploadedImages
+        };
+    
+        const url = postId ? `/api/update_post.php?id=${postId}` : '/api/create_post.php';
+    
+        // try {
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    user_id: 1,
-                    content: postCaption.value,
-                    images: uploadedImages
-                })
+                body: JSON.stringify(payload)
             });
-
+    
             const result = await response.json();
             if (result.success) {
-                alert('Post created successfully');
+                alert(postId ? 'Пост обновлён' : 'Пост создан');
                 resetForm();
+                location.href = '/home.php';
             } else {
-                alert('Error: ' + (result.error || 'Unknown error'));
+                alert('Ошибка: ' + (result.error || 'Неизвестная ошибка'));
             }
-        } catch (error) {
-            console.error('Error creating post:', error);
-            alert('Network error');
-        }
+        // } catch (err) {
+        //     console.error('Ошибка при сохранении поста:', err);
+        //     alert('Ошибка сети');
+        // }
     }
+    
 
     function resetForm() {
         uploadedImages = [];
@@ -111,12 +148,22 @@ document.addEventListener('DOMContentLoaded', () => {
         updateImageDisplay();
     }
 
+    function deleteSlide() {
+        previewImages.splice(currentSlideIndex, 1);
+        uploadedImages.splice(currentSlideIndex, 1);
+        if (currentSlideIndex >= previewImages.length && previewImages.length > 0) {
+            currentSlideIndex = previewImages.length - 1;
+        }
+        updateImageDisplay();
+    }
+
     function updateImageDisplay() {
         if (previewImages.length > 0) {
             imageUploader.style.display = 'none';
             imageSlider.style.display = 'block';
             if (previewImages.length > 1){
                 sliderCounter.style.display = 'flex';
+                deleteBtn.style.display = 'flex';
                 nextBtn.style.display = 'flex';
                 prevBtn.style.display = 'flex';
 
